@@ -7,6 +7,8 @@
   --mainGrey: #ececec;
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
+  --uncrowdBackgroundColor: #0151C9;
+  --uncrowdTextColor: #F2475A;
 }
 * {
   margin: 0;
@@ -18,3 +20,84 @@ body {
   background: var(--mainWhite);
   font-family: "Lato", sans-serif;
 }
+
+/* Nav Bar */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: var(--uncrowdBackgroundColor);
+    z-index: 1;
+  }
+  .navbar-center {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+  .nav-icon {
+    font-size: 2rem;
+    color: var(--uncrowdTextColor);
+  }
+  .logo {
+      height: 40px;
+  }
+  .cart-btn {
+    position: relative;
+    cursor: pointer;
+  }
+  .cart-items {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primaryColor);
+    padding: 0 5px;
+    border-radius: 30%;
+    color: var(--mainWhite);
+  }
+
+  /* Hero */
+
+  .hero {
+    min-height: calc(100vh - 60px);
+    background: url("./assets/hero.png") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .banner {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    padding: 2rem;
+  }
+  .banner-title {
+    font-size: 3.4rem;
+    text-transform: uppercase;
+    letter-spacing: var(--mainSpacing);
+    margin-bottom: 3rem;
+    color: var(--uncrowdTextColor)
+  }
+  .banner-btn {
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    letter-spacing: var(--mainSpacing);
+    font-size: 1rem;
+    background: var(--uncrowdBackgroundColor);
+    color: var(--uncrowdTextColor);
+    border: 1px solid var(--uncrowdTextColor);
+    transition: var(--mainTransition);
+    cursor: pointer;
+  }
+  .banner-btn:hover {
+    background: #055EE5;
+    color: #F96474;
+    border: 1px solid #F96474;
+  }
