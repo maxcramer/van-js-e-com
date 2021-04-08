@@ -256,7 +256,7 @@ body {
     text-align: center;
   }
   .remove-item {
-    color: grey;
+    color: black;
     cursor: pointer;
   }
   .fa-chevron-up,
