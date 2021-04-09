@@ -70,10 +70,11 @@ class UI {
                     event.target.disabled = true;
 
                     // get product from products
-                    let cartItem = Storage.getProduct(id);
-                    console.log(cartItem)
+                    let cartItem = {...Storage.getProduct(id), amount:1};
+                    
                     // add product object to cart array 
-
+                    cart = [...cart, cartItem];
+                    console.log(cart)
                     
                     // save cart in LOCAL STORAGE
 
