@@ -114,7 +114,6 @@ class UI {
             <i class="fas fa-chevron-down" data-id=${item.id}></i>
         </div>`;
         cartContent.appendChild(div);
-        console.log(cartContent)
     } 
     showCart() {
         cartOverlay.classList.add("transparentBcg");
@@ -142,6 +141,14 @@ class UI {
             this.clearCart();
         })
         // cart Functionality 
+        cartContent.addEventListener('click', event => {
+            if(event.target.classList.contains('remove-item')) {
+                let removeItem = event.target;
+                let id = removeItem.dataset.id;
+                cartContent.removeChild(removeItem.parentElement.parentElement);
+                this.removeItem(id);
+            }
+        })
     }
     clearCart() {
         let cartItems = cart.map(item => item.id);
@@ -149,6 +156,7 @@ class UI {
         while(cartContent.children.length > 0) {
             cartContent.removeChild(cartContent.children[0])
         }
+        this.hideCart();
     }
     removeItem(id) {
         cart = cart.filter(item => item.id !== id);
@@ -156,7 +164,7 @@ class UI {
         Storage.saveCart(cart);
         let button = this.getSingleButton(id);
         button.disable = false;
-        button.innerHTML = `<i class="fas fa-shopping-cart></i> Add To Cart`
+        button.innerHTML = `<i class="fas fa-shopping-cart"></i> Add To Cart`
     }
     getSingleButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id);
