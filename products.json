@@ -69,7 +69,7 @@
       "fields": {
         "title": "Uncrowd Sausage",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-9.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/Product-9.jpeg" } } }
       }
     }
   ]
