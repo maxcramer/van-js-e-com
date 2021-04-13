@@ -3,7 +3,7 @@
     {
       "sys": { "id": "1" },
       "fields": {
-        "title": "T-Shirt 1",
+        "title": "Uncrowd The Ramones",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-1.png" } } }
       }
@@ -11,7 +11,7 @@
     {
       "sys": { "id": "2" },
       "fields": {
-        "title": "T-Shirt 2",
+        "title": "Uncrowd Royal Blood",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-2.png" } } }
       }
@@ -19,7 +19,7 @@
     {
       "sys": { "id": "3" },
       "fields": {
-        "title": "T-Shirt 3",
+        "title": "Ucrowd OG",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-3.png" } } }
       }
@@ -27,7 +27,7 @@
     {
       "sys": { "id": "4" },
       "fields": {
-        "title": "T-Shirt 4",
+        "title": "Uncrowd RHCP",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-4.png" } } }
       }
@@ -35,7 +35,7 @@
     {
       "sys": { "id": "5" },
       "fields": {
-        "title": "T-Shirt 5",
+        "title": "Uncrowd FRI",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-5.png" } } }
       }
@@ -43,7 +43,7 @@
     {
       "sys": { "id": "6" },
       "fields": {
-        "title": "T-Shirt 6",
+        "title": "Uncrowd PXL",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-6.png" } } }
       }
@@ -51,7 +51,7 @@
     {
       "sys": { "id": "7" },
       "fields": {
-        "title": "T-Shirt 7",
+        "title": "Uncrowd Slipknot",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-7.png" } } }
       }
@@ -59,7 +59,7 @@
     {
       "sys": { "id": "8" },
       "fields": {
-        "title": "T-Shirt 8",
+        "title": "Uncrowd Iron Maiden",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-8.png" } } }
       }
@@ -67,7 +67,7 @@
     {
       "sys": { "id": "9" },
       "fields": {
-        "title": "T-Shirt 9",
+        "title": "Uncrowd Sausage",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-9.png" } } }
       }
