@@ -178,6 +178,7 @@ body {
     margin-top: 1rem;
     letter-spacing: var(--mainSpacing);
     text-align: center;
+    color: white;
   }
   
   .product h4 {
@@ -260,6 +261,7 @@ body {
   }
   .item-amount {
     text-align: center;
+    color: var(--uncrowdTextColor);
   }
   .remove-item {
     color: black;
@@ -267,7 +269,7 @@ body {
   }
   .fa-chevron-up,
   .fa-chevron-down {
-    color: var(--primaryColor);
+    color: var(--uncrowdBackgroundColor);
     cursor: pointer;
   }
   /*---------- End of Cart Item -------------------- */
@@ -280,6 +282,10 @@ body {
   .cart-footer h3 {
     text-transform: capitalize;
     margin-bottom: 1rem;
+  }
+
+  .fa-window-close {
+    color: var(--uncrowdBackgroundColor);
   }
   
   /* --------------- End of Cart ---------------- */
