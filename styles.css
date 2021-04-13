@@ -164,8 +164,9 @@ body {
   .product-img {
     display: block;
     width: 100%;
-    min-height: 12rem;
+    min-height: 20rem;
     transition: var(--mainTransition);
+    
   }
   .img-container:hover .product-img {
     opacity: 0.5;
