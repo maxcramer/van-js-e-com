@@ -5,7 +5,12 @@
       "fields": {
         "title": "Uncrowd The Ramones",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } },
+        "sizes": [
+           { "small":  true},
+           { "medium": true },
+           { "large": true }
+        ]
       }
     },
     {
@@ -13,7 +18,12 @@
       "fields": {
         "title": "Uncrowd Royal Blood",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -21,7 +31,12 @@
       "fields": {
         "title": "Ucrowd OG",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -29,7 +44,12 @@
       "fields": {
         "title": "Uncrowd RHCP",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -37,7 +57,12 @@
       "fields": {
         "title": "Uncrowd FRI",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -45,7 +70,12 @@
       "fields": {
         "title": "Uncrowd PXL",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -53,7 +83,12 @@
       "fields": {
         "title": "Uncrowd Slipknot",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -61,7 +96,12 @@
       "fields": {
         "title": "Uncrowd Iron Maiden",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     },
     {
@@ -69,79 +109,12 @@
       "fields": {
         "title": "Uncrowd Sausage",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/Product-9.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "10" },
-      "fields": {
-        "title": "Uncrowd The Ramones",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "11" },
-      "fields": {
-        "title": "Uncrowd Royal Blood",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "12" },
-      "fields": {
-        "title": "Ucrowd OG",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "13" },
-      "fields": {
-        "title": "Uncrowd RHCP",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "14" },
-      "fields": {
-        "title": "Uncrowd FRI",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "15" },
-      "fields": {
-        "title": "Uncrowd PXL",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "16" },
-      "fields": {
-        "title": "Uncrowd Slipknot",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "17" },
-      "fields": {
-        "title": "Uncrowd Iron Maiden",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
-      }
-    },
-    {
-      "sys": { "id": "18" },
-      "fields": {
-        "title": "Uncrowd Sausage",
-        "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/Product-9.jpeg" } } }
+        "image": { "fields": { "file": { "url": "./images/Product-9.jpeg" } } },
+        "sizes": [
+          { "small":  true},
+          { "medium": true },
+          { "large": true }
+       ]
       }
     }
   ]
