@@ -185,7 +185,7 @@ body {
     margin-top: 1rem;
     letter-spacing: var(--mainSpacing);
     text-align: center;
-    color: white;
+    color: var(--uncrowdTextColor);
   }
   
   .product h4 {
