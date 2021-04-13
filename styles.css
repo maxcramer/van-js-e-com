@@ -166,6 +166,7 @@ body {
     width: 100%;
     min-height: 20rem;
     transition: var(--mainTransition);
+    background-color: white;
     
   }
   .img-container:hover .product-img {
