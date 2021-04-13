@@ -167,8 +167,10 @@ body {
     border: 1px solid #F96474;
     background-color: #055EE5;
   }
-  .fa-shopping-cart {
+  .add-to-cart-icon {
     margin-right: 0.5rem;
+    height: 30px;
+    fill: #F96474; 
   }
   .img-container:hover .bag-btn {
     transform: translateX(0);
