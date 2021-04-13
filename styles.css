@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
+@font-face {
+  font-family: MarbyPro;
+  src: url(./assets/MabryPro.otf);
+}
+
 :root {
   --primaryColor: #f09d51;
   --mainWhite: #fff;
@@ -18,12 +23,13 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: MarbyPro;
  }
 
 body {
   color: var(--mainBlack);
   background: var(--mainWhite);
-  font-family: "Lato", sans-serif;
+  font-family: MarbyPro;
 }
 
 /* Nav Bar */
