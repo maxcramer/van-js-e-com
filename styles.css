@@ -131,9 +131,15 @@ body {
     grid-column-gap: 1.5rem;
     grid-row-gap: 2rem;
   }
+
+  .product {
+    width: 100%;  
+  }
+
   .img-container {
     position: relative;
     overflow: hidden;
+    width: 100%;
   }
   .bag-btn {
     position: absolute;
@@ -163,7 +169,7 @@ body {
   }
   .product-img {
     display: block;
-    width: 100%;
+    /* width: 100%; */
     min-height: 20rem;
     transition: var(--mainTransition);
     background-color: white;
