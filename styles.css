@@ -19,7 +19,7 @@
 html {
   scroll-behavior: smooth;
  }
- 
+
 body {
   color: var(--mainBlack);
   background: var(--mainWhite);
@@ -52,7 +52,7 @@ body {
     color: var(--uncrowdTextColor);
   }
   .logo {
-      height: 40px;
+      height: 60px;
   }
   .cart-btn {
     position: relative;
