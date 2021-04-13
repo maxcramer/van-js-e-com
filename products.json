@@ -5,7 +5,7 @@
       "fields": {
         "title": "Uncrowd The Ramones",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-1.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
       }
     },
     {
@@ -13,7 +13,7 @@
       "fields": {
         "title": "Uncrowd Royal Blood",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-2.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
       }
     },
     {
@@ -21,7 +21,7 @@
       "fields": {
         "title": "Ucrowd OG",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-3.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
       }
     },
     {
@@ -29,7 +29,7 @@
       "fields": {
         "title": "Uncrowd RHCP",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-4.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
       }
     },
     {
@@ -37,7 +37,7 @@
       "fields": {
         "title": "Uncrowd FRI",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-5.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
       }
     },
     {
@@ -45,7 +45,7 @@
       "fields": {
         "title": "Uncrowd PXL",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-6.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
       }
     },
     {
@@ -53,7 +53,7 @@
       "fields": {
         "title": "Uncrowd Slipknot",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-7.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
       }
     },
     {
@@ -61,7 +61,7 @@
       "fields": {
         "title": "Uncrowd Iron Maiden",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-8.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
     },
     {
@@ -69,7 +69,7 @@
       "fields": {
         "title": "Uncrowd Sausage",
         "price": 10.99,
-        "image": { "fields": { "file": { "url": "./images/product-9.png" } } }
+        "image": { "fields": { "file": { "url": "./images/product-9.jpeg" } } }
       }
     }
   ]
