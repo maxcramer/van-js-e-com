@@ -72,7 +72,6 @@ class UI {
             `;
         });
         productsDOM.innerHTML = result;
-        var sizeSel
     }
     
     getBagButtons() {
