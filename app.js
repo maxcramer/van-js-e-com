@@ -8,6 +8,13 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
+var e = document.getElementById("sizes-1");
+
+// alert(document.getElementsByTagName("option")[e].value);
+// var sizes = [e.selectedIndex].value;
+// var text = e.options[e,selectedIndex].text;
+// console.log("sizes", sizes);
+// console.log("text", text);
 // Cart 
 let cart = [];
 // Buttons 
@@ -19,13 +26,16 @@ class Products {
         try {
             let result = await fetch('products.json')
             let data = await result.json();
+            // console.log(data)
             let products = data.items
             products = products.map(item => {
                 const { title, price } = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
-                return { title, price, id, image }
+                const sizes = item.fields.sizes;
+                return { title, price, id, image, sizes }
             })
+            
             return products;
         }
         catch (error) {
@@ -37,8 +47,10 @@ class Products {
 // Display products 
 class UI {
     displayProducts(products) {
+        
         let result= '';
         products.forEach(product => {
+            // console.log(product.sizes)
             result += `
             <article class="product">
                 <div class="img-container">
@@ -48,13 +60,24 @@ class UI {
                         Add to Cart
                     </button>            
                 </div>
+                <label for="sizes">Select Size:</label>
+                <select name="sizes" id="sizes-${product.id}">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <button onClick=alert(document.getElementById('sizes-${product.id}').value)>
+                    select
+                </button>
                 <h3>${product.title}</h3>
                 <h4>£${product.price}</h4>
             </article>
             `;
         });
         productsDOM.innerHTML = result;
+        var sizeSel
     }
+    
     getBagButtons() {
         const buttons = [...document.querySelectorAll(".bag-btn")];
         buttonsDOM = buttons;
@@ -106,6 +129,7 @@ class UI {
         <div>
             <h4>${item.title}</h4>
             <h5>£${item.price}</h5>
+            <h5>size: ${item.small}</h5>
             <span class="remove-item" data-id=${item.id}>Remove</span> 
         </div>
         <div>
@@ -209,6 +233,7 @@ class Storage {
         return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []; 
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const ui = new UI();

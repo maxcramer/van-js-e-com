@@ -7,10 +7,8 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } },
         "sizes": [
-           { "small":  true},
-           { "medium": true },
-           { "large": true }
-        ]
+          "small", "medium", "large"
+       ]
       }
     },
     {
@@ -20,9 +18,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -33,9 +29,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -46,9 +40,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -59,9 +51,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -72,9 +62,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -85,9 +73,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -98,9 +84,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     },
@@ -111,9 +95,7 @@
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/Product-9.jpeg" } } },
         "sizes": [
-          { "small":  true},
-          { "medium": true },
-          { "large": true }
+          "small", "medium", "large"
        ]
       }
     }
