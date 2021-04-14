@@ -55,7 +55,7 @@ class UI {
             <article class="product">
                 <div class="img-container">
                     <img class="product-img" src=${product.image}>
-                    <button class="bag-btn" data-id=${product.id}>
+                    <button class="bag-btn" data-id=${product.id} onClick=alert(document.getElementById('sizes-${product.id}').value)>
                         <i class="fas fa-shopping-cart"></i>
                         Add to Cart
                     </button>            
@@ -66,9 +66,6 @@ class UI {
                     <option value="medium">Medium</option>
                     <option value="large">Large</option>
                 </select>
-                <button onClick=alert(document.getElementById('sizes-${product.id}').value)>
-                    select
-                </button>
                 <h3>${product.title}</h3>
                 <h4>£${product.price}</h4>
             </article>
