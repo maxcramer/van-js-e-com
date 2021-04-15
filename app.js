@@ -8,7 +8,7 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
-var e = document.getElementById("sizes-1");
+// let sizesValue = document.getElementById('sizes-${product.id}');
 
 // alert(document.getElementsByTagName("option")[e].value);
 // var sizes = [e.selectedIndex].value;
@@ -47,24 +47,26 @@ class Products {
 // Display products 
 class UI {
     displayProducts(products) {
+        // let size = document.getElementById('sizes').value;
+        // console.log(size)
         
         let result= '';
+        // let sizeResult = document.getElementById('sizes-${product.id}').value = 0;
         products.forEach(product => {
-            // console.log(product.sizes)
             result += `
             <article class="product">
                 <div class="img-container">
                     <img class="product-img" src=${product.image}>
-                    <button class="bag-btn" data-id=${product.id} onClick=alert(document.getElementById('sizes-${product.id}').value)>
+                    <button class="bag-btn" data-id=${product.id} onClick="sizes = document.getElementById('sizes-${product.id}').value">
                         <i class="fas fa-shopping-cart"></i>
                         Add to Cart
                     </button>            
                 </div>
                 <label for="sizes">Select Size:</label>
-                <select name="sizes" id="sizes-${product.id}">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
+                <select name="sizes-${product.id}" id="sizes-${product.id}">
+                    <option value=${product.sizes[0]}>Small</option>
+                    <option value=${product.sizes[1]}>Medium</option>
+                    <option value=${product.sizes[2]}>Large</option>
                 </select>
                 <h3>${product.title}</h3>
                 <h4>£${product.price}</h4>
@@ -73,6 +75,7 @@ class UI {
         });
         productsDOM.innerHTML = result;
     }
+
     
     getBagButtons() {
         const buttons = [...document.querySelectorAll(".bag-btn")];
@@ -125,7 +128,7 @@ class UI {
         <div>
             <h4>${item.title}</h4>
             <h5>£${item.price}</h5>
-            <h5>size: ${item.small}</h5>
+            <h5>size: ${item.sizes}</h5>
             <span class="remove-item" data-id=${item.id}>Remove</span> 
         </div>
         <div>
