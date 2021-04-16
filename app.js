@@ -8,7 +8,7 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
-// let sizesValue = document.getElementById('sizes-${product.id}');
+
 
 // alert(document.getElementsByTagName("option")[e].value);
 // var sizes = [e.selectedIndex].value;
@@ -46,36 +46,51 @@ class Products {
 
 // Display products 
 class UI {
+
     displayProducts(products) {
+        
         // let size = document.getElementById('sizes').value;
         // console.log(size)
         
         let result= '';
         // let sizeResult = document.getElementById('sizes-${product.id}').value = 0;
+        
+        // console.log("size:", size);
         products.forEach(product => {
             result += `
             <article class="product">
                 <div class="img-container">
                     <img class="product-img" src=${product.image}>
-                    <button class="bag-btn" data-id=${product.id} onClick="sizes = document.getElementById('sizes-${product.id}').value">
+                    <button class="bag-btn" data-id=${product.id}>
                         <i class="fas fa-shopping-cart"></i>
                         Add to Cart
                     </button>            
                 </div>
                 <label for="sizes">Select Size:</label>
-                <select name="sizes-${product.id}" id="sizes-${product.id}">
-                    <option value=${product.sizes[0]}>Small</option>
-                    <option value=${product.sizes[1]}>Medium</option>
-                    <option value=${product.sizes[2]}>Large</option>
-                </select>
+                <select name="sizes-${product.id}" id="sizes-${product.id}">`;
+            
+            product.sizes.forEach(size => {
+                result += `<option value="${size.value}">${size.name}</option>`;
+            });
+
+            result += `</select>
                 <h3>${product.title}</h3>
                 <h4>£${product.price}</h4>
             </article>
             `;
         });
         productsDOM.innerHTML = result;
+        // products.forEach(product => {
+        //     let sizesValue = document.getElementById(`sizes-${product.id}`);
+        //     console.log("sizesValue:", sizesValue)
+        //     const selectBox = sizesValue.options[sizesValue.selectedIndex].value;
+        //     // console.log(`sizes-${product.id}`.value)
+        //     const selectedSize  = selectBox.options[selectBox.selectedIndex];
+        //     // size = selectedSize.getAttribute('size');
+        //     console.log(selectedSize); // Non of this selectBox working because script running before DOM contents has loaded, so cannot get the values
+        // });
     }
-
+   
     
     getBagButtons() {
         const buttons = [...document.querySelectorAll(".bag-btn")];
@@ -85,33 +100,37 @@ class UI {
             let inCart = cart.find(item => item.id === id);
             if(inCart) {
                 button.innerText = "In Cart";
-                button.disabled = true;
+                button.disabled = false;
             }
                 button.addEventListener('click', event => {
-                    event.target.innerText = "In Cart";
                     event.target.disabled = true;
 
+                    // Get the selected size from the page html using the id value
+                    const size = document.getElementById(`sizes-${id}`).value;
+                    console.log('size: ', size);
+
                     // GET product from products
-                    let cartItem = {...Storage.getProduct(id), amount:1};
+                    let cartItem = { id, amount: 1, size };
                     
-                    // ADD product object to cart array 
-                    cart = [...cart, cartItem];
-                    
-                    // SAVE cart in LOCAL STORAGE
-                    Storage.saveCart(cart);
+                    Storage.addItemToCart(cartItem);
                     
                     // SET cart values
-                    this.setCartValues(cart);
+                    this.setCartCosts(cart);
 
                     // DISPLAY cart item
-                    this.addCartItem(cartItem);
+                    console.log('cartItem: ', cartItem);
 
-                    // SHOW the Cart 
+
+                    // DRAW the cart
+                    this.drawCart();
+
+                    // SHOW the cart 
                     this.showCart();
+                    event.target.innerText = "In Cart";
                 });
         });
     }
-    setCartValues(cart) {
+    setCartCosts(cart) {
         let tempTotal = 0;
         let itemsTotal = 0;
         cart.map(item => {
@@ -121,23 +140,60 @@ class UI {
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = itemsTotal;
     }
-    addCartItem(item) {
-        const div = document.createElement("div");
-        div.classList.add('cart-item'); 
-        div.innerHTML = `<img src=${item.image} alt="product">
-        <div>
-            <h4>${item.title}</h4>
-            <h5>£${item.price}</h5>
-            <h5>size: ${item.sizes}</h5>
-            <span class="remove-item" data-id=${item.id}>Remove</span> 
-        </div>
-        <div>
-            <i class="fas fa-chevron-up" data-id=${item.id}></i>
-            <p class="item-amount">${item.amount}</p>
-            <i class="fas fa-chevron-down" data-id=${item.id}></i>
-        </div>`;
-        cartContent.appendChild(div);
-    } 
+
+    // addCartItemBeta(item) {
+    //     const div = document.createElement("div");
+    //     div.classList.add('cart-item'); 
+    //     div.innerHTML = `
+    //     <img src=${item.image} alt="product">
+    //         <div>
+    //             <h4>${item.title}</h4>
+    //             <h5>£${item.price}</h5>
+    //             <h5>size: ${item.size}</h5>
+    //             <span class="remove-item" data-id=${item.id}>Remove</span> 
+    //         </div>
+    //         <div>
+    //             <i class="fas fa-chevron-up" data-id=${item.id}></i>
+    //             <p class="item-amount">${item.amount}</p>
+    //             <i class="fas fa-chevron-down" data-id=${item.id}></i>
+    //         </div>`;
+    //     cartContent.appendChild(div);
+    // } 
+
+    drawCart() {
+        const cartElement = document.getElementById('cart-content');
+        let innerHtml = '';
+        const cart = Storage.getCartContents();
+        if (cart && cart.length > 0) {
+            cart.forEach(item => {
+                const matchingProduct = Storage.getProduct(item.id);
+                const product = { ...matchingProduct, ...item };
+                innerHtml += `
+                <img src=${product.image} alt="product">
+                <div>
+                    <h4>${product.title}</h4>
+                    <h5>£${product.price}</h5>
+                    <h5>size: ${product.size}</h5>
+                    <span class="remove-item" data-id=${product.id}>Remove</span> 
+                </div>
+                <div>
+                    <i class="fas fa-chevron-up" data-id=${product.id}></i>
+                    <p class="item-amount">${product.amount}</p>
+                    <i class="fas fa-chevron-down" data-id=${product.id}></i>
+                </div>`
+            });
+        }
+        cartElement.innerHTML = innerHtml;
+    }
+
+
+    addCartItem(cartItemAsObject) {
+        // const cart = [{ title: 'my-shirt', price: 45, size: 'small', id: 12 }];
+        const cart = Storage.getCartContents();
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+
     showCart() {
         cartOverlay.classList.add("transparentBcg");
         cartDOM.classList.add("showCart");
@@ -145,7 +201,7 @@ class UI {
     }
     setupAPP() {
         cart = Storage.getCart();
-        this.setCartValues(cart);
+        this.setCartCosts(cart);
         this.populateCart(cart);
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart)
@@ -177,7 +233,7 @@ class UI {
                 let tempItem = cart.find(item => item.id === id);
                 tempItem.amount = tempItem.amount + 1;
                 Storage.saveCart(cart);
-                this.setCartValues(cart);
+                this.setCartCosts(cart);
                 addAmount.nextElementSibling.innerText = tempItem.amount;
             } else if (event.target.classList.contains("fa-chevron-down")) {
                 let lowerAmount = event.target;
@@ -186,7 +242,7 @@ class UI {
                 tempItem.amount = tempItem.amount - 1;
                 if(tempItem.amount > 0) {
                     Storage.saveCart(cart);
-                    this.setCartValues(cart);
+                    this.setCartCosts(cart);
                     lowerAmount.previousElementSibling.innerText = tempItem.amount;
                 } else {
                     cartContent.removeChild(lowerAmount.parentElement.parentElement);
@@ -205,7 +261,7 @@ class UI {
     }
     removeItem(id) {
         cart = cart.filter(item => item.id !== id);
-        this.setCartValues(cart);
+        this.setCartCosts(cart);
         Storage.saveCart(cart);
         let button = this.getSingleButton(id);
         button.disable = false;
@@ -230,6 +286,20 @@ class Storage {
     }
     static getCart() {
         return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []; 
+    }
+
+    static getCartContents() {
+        const cartString = localStorage.getItem('cart');
+        if (cartString) return JSON.parse(cartString);
+        return [];
+    }
+
+    static addItemToCart(item) {
+        // we might want to add logic here to see if the item is already in the cart, 
+        // if it is, we should just update the quantity rather than add a new item
+        const cart = this.getCartContents();
+        cart.push(item);
+        localStorage.setItem('cart', JSON.stringify(cart));
     }
 }
 
