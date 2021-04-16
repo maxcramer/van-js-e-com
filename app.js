@@ -160,16 +160,17 @@ class UI {
     //     cartContent.appendChild(div);
     // } 
 
-    drawCart() {
-        const cartElement = document.getElementById('cart-content');
-        let innerHtml = '';
+    drawCart(product) {
+        // const cartElement = document.getElementById('cart-content');
+        const div = document.createElement("div");
+        // let innerHtml = '';
+        div.classList.add('cart-item');
         const cart = Storage.getCartContents();
         if (cart && cart.length > 0) {
             cart.forEach(item => {
                 const matchingProduct = Storage.getProduct(item.id);
                 const product = { ...matchingProduct, ...item };
-                innerHtml += `
-                <img src=${product.image} alt="product">
+                div.innerHTML += `<img src=${product.image} alt="product">
                 <div>
                     <h4>${product.title}</h4>
                     <h5>£${product.price}</h5>
@@ -180,10 +181,10 @@ class UI {
                     <i class="fas fa-chevron-up" data-id=${product.id}></i>
                     <p class="item-amount">${product.amount}</p>
                     <i class="fas fa-chevron-down" data-id=${product.id}></i>
-                </div>`
-            });
+                </div>`;
+                cartContent.appendChild(div)} );
         }
-        cartElement.innerHTML = innerHtml;
+        // cartContent.innerHTML = innerHtml;
     }
 
 
