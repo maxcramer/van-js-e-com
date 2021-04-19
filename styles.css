@@ -179,6 +179,7 @@ body {
   .sizes{
     z-index: 30;
     top: 55%;
+    text-transform: capitalize;
   }
 
   .product-img {
