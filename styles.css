@@ -175,6 +175,12 @@ body {
   .img-container:hover .bag-btn {
     transform: translateX(0);
   }
+
+  .sizes{
+    z-index: 30;
+    top: 55%;
+  }
+
   .product-img {
     display: block;
     /* width: 100%; */

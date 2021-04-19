@@ -47,19 +47,22 @@ class UI {
             <article class="product">
                 <div class="img-container">
                     <img class="product-img" src=${product.image}>
+                    <div>
                     <button class="bag-btn" data-id=${product.id}>
                         <i class="fas fa-shopping-cart"></i>
                         Add to Cart
-                    </button>            
+                    </button>    
+                    <select name="sizes-${product.id}" id="sizes-${product.id}" class="bag-btn sizes">
+        
                 </div>
-                <label for="sizes">Select Size:</label>
-                <select name="sizes-${product.id}" id="sizes-${product.id}">`;
+                `;
             
             product.sizes.forEach(size => {
                 result += `<option value="${size.value}">${size.name}</option>`;
             });
 
             result += `</select>
+            </div>
                 <h3>${product.title}</h3>
                 <h4>£${product.price}</h4>
             </article>
@@ -75,10 +78,10 @@ class UI {
         buttons.forEach(button => {
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id);
-            if(inCart) {
-                button.innerText = "In Cart";
-                button.disabled = false;
-            }
+            // if(inCart) {
+            //     button.innerText = "In Cart";
+            //     button.disabled = false;
+            // }
                 button.addEventListener('click', event => {
                     event.target.disabled = false;
 
@@ -96,7 +99,7 @@ class UI {
 
                     // SHOW the cart 
                     this.showCart();
-                    event.target.innerText = "In Cart";
+                    // event.target.innerText = "In Cart";
                 });
         });
     }
