@@ -9,12 +9,6 @@ const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
 
-
-// alert(document.getElementsByTagName("option")[e].value);
-// var sizes = [e.selectedIndex].value;
-// var text = e.options[e,selectedIndex].text;
-// console.log("sizes", sizes);
-// console.log("text", text);
 // Cart 
 let cart = [];
 // Buttons 
@@ -26,7 +20,6 @@ class Products {
         try {
             let result = await fetch('products.json')
             let data = await result.json();
-            // console.log(data)
             let products = data.items
             products = products.map(item => {
                 const { title, price } = item.fields;
@@ -48,14 +41,7 @@ class Products {
 class UI {
 
     displayProducts(products) {
-        
-        // let size = document.getElementById('sizes').value;
-        // console.log(size)
-        
         let result= '';
-        // let sizeResult = document.getElementById('sizes-${product.id}').value = 0;
-        
-        // console.log("size:", size);
         products.forEach(product => {
             result += `
             <article class="product">
@@ -80,15 +66,6 @@ class UI {
             `;
         });
         productsDOM.innerHTML = result;
-        // products.forEach(product => {
-        //     let sizesValue = document.getElementById(`sizes-${product.id}`);
-        //     console.log("sizesValue:", sizesValue)
-        //     const selectBox = sizesValue.options[sizesValue.selectedIndex].value;
-        //     // console.log(`sizes-${product.id}`.value)
-        //     const selectedSize  = selectBox.options[selectBox.selectedIndex];
-        //     // size = selectedSize.getAttribute('size');
-        //     console.log(selectedSize); // Non of this selectBox working because script running before DOM contents has loaded, so cannot get the values
-        // });
     }
    
     
@@ -103,22 +80,15 @@ class UI {
                 button.disabled = false;
             }
                 button.addEventListener('click', event => {
-                    event.target.disabled = true;
+                    event.target.disabled = false;
 
                     // Get the selected size from the page html using the id value
                     const size = document.getElementById(`sizes-${id}`).value;
-                    console.log('size: ', size);
-
-                    // GET product from products
-                    let cartItem = { id, amount: 1, size };
                     
-                    Storage.addItemToCart(cartItem);
+                    Storage.addItemToCart(`${id}-${size}`);
                     
                     // SET cart values
                     this.setCartCosts(cart);
-
-                    // DISPLAY cart item
-                    console.log('cartItem: ', cartItem);
 
 
                     // DRAW the cart
@@ -134,7 +104,9 @@ class UI {
         let tempTotal = 0;
         let itemsTotal = 0;
         cart.map(item => {
-            tempTotal += item.price * item.amount;
+            const id = item.sku.split('-')[0];
+            const matchingProduct = Storage.getProduct(id);
+            tempTotal += matchingProduct.price * item.amount;
             itemsTotal += item.amount;
         })
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
@@ -160,31 +132,52 @@ class UI {
     //     cartContent.appendChild(div);
     // } 
 
-    drawCart(product) {
-        // const cartElement = document.getElementById('cart-content');
+    drawCart() {
+        cartContent.innerHTML = '';
         const div = document.createElement("div");
-        // let innerHtml = '';
         div.classList.add('cart-item');
         const cart = Storage.getCartContents();
+
+        this.setCartCosts(cart);
         if (cart && cart.length > 0) {
             cart.forEach(item => {
-                const matchingProduct = Storage.getProduct(item.id);
+
+                // Collate the cart and product information
+                const [id, size] = item.sku.split('-');
+                const matchingProduct = Storage.getProduct(id);
                 const product = { ...matchingProduct, ...item };
-                div.innerHTML += `<img src=${product.image} alt="product">
+
+                // Add the html for each item
+                div.innerHTML += `
+                <img src=${product.image} alt="product">
                 <div>
                     <h4>${product.title}</h4>
                     <h5>£${product.price}</h5>
-                    <h5>size: ${product.size}</h5>
-                    <span class="remove-item" data-id=${product.id}>Remove</span> 
+                    <h5>size: ${size}</h5>
+                    <span id="cart-${product.sku}-delete" class="remove-item" data-id=${product.id}>Remove</span> 
                 </div>
                 <div>
-                    <i class="fas fa-chevron-up" data-id=${product.id}></i>
-                    <p class="item-amount">${product.amount}</p>
-                    <i class="fas fa-chevron-down" data-id=${product.id}></i>
+                    <i id="cart-${product.sku}-increment" class="fas fa-chevron-up" data-id=${product.id}></i>
+                        <p class="item-amount">${product.amount}</p>
+                    <i id="cart-${product.sku}-decrement" class="fas fa-chevron-down" data-id=${product.id}></i>
                 </div>`;
-                cartContent.appendChild(div)} );
+                cartContent.appendChild(div);
+
+                // Wire up click handlers
+                document.getElementById(`cart-${product.sku}-increment`).onclick = () => {
+                    Storage.removeItemFromCart(product.sku);
+                    this.drawCart();
+                }
+                document.getElementById(`cart-${product.sku}-increment`).onclick = () => {
+                    Storage.setItemAmount(product.sku, product.amount + 1);
+                    this.drawCart();
+                }
+                document.getElementById(`cart-${product.sku}-decrement`).onclick = () => {
+                    Storage.setItemAmount(product.sku, product.amount - 1);
+                    this.drawCart();
+                }
+            });
         }
-        // cartContent.innerHTML = innerHtml;
     }
 
 
@@ -201,16 +194,16 @@ class UI {
 
     }
     setupAPP() {
-        cart = Storage.getCart();
-        this.setCartCosts(cart);
-        this.populateCart(cart);
+        this.drawCart();
+        // cart = Storage.getCart();
+        // this.setCartCosts(cart);
+        // this.populateCart(cart);
         cartBtn.addEventListener('click', this.showCart);
         closeCartBtn.addEventListener('click', this.hideCart)
         cartOverlay.addEventListener('click', this.hideCart)
     }
     populateCart(cart) {
-        cart.forEach(item => this.addCartItem(item));
-
+        // cart.forEach(item => this.addCartItem(item));
     }
     hideCart() {
         cartOverlay.classList.remove("transparentBcg");
@@ -223,41 +216,38 @@ class UI {
         })
         // cart Functionality 
         cartContent.addEventListener('click', event => {
-            if(event.target.classList.contains('remove-item')) {
-                let removeItem = event.target;
-                let id = removeItem.dataset.id;
-                cartContent.removeChild(removeItem.parentElement.parentElement);
-                this.removeItem(id);
-            } else if (event.target.classList.contains("fa-chevron-up")) {
-                let addAmount = event.target;
-                let id = addAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
-                tempItem.amount = tempItem.amount + 1;
-                Storage.saveCart(cart);
-                this.setCartCosts(cart);
-                addAmount.nextElementSibling.innerText = tempItem.amount;
-            } else if (event.target.classList.contains("fa-chevron-down")) {
-                let lowerAmount = event.target;
-                let id = lowerAmount.dataset.id;
-                let tempItem = cart.find(item => item.id === id);
-                tempItem.amount = tempItem.amount - 1;
-                if(tempItem.amount > 0) {
-                    Storage.saveCart(cart);
-                    this.setCartCosts(cart);
-                    lowerAmount.previousElementSibling.innerText = tempItem.amount;
-                } else {
-                    cartContent.removeChild(lowerAmount.parentElement.parentElement);
-                    this.removeItem(id);
-                }
-            }
+            // if(event.target.classList.contains('remove-item')) {
+            //     let removeItem = event.target;
+            //     let id = removeItem.dataset.id;
+            //     cartContent.removeChild(removeItem.parentElement.parentElement);
+            //     this.removeItem(id);
+            // } else if (event.target.classList.contains("fa-chevron-up")) {
+            //     let addAmount = event.target;
+            //     let id = addAmount.dataset.id;
+            //     let tempItem = cart.find(item => item.id === id);
+            //     tempItem.amount = tempItem.amount + 1;
+            //     Storage.saveCart(cart);
+            //     this.setCartCosts(cart);
+            //     addAmount.nextElementSibling.innerText = tempItem.amount;
+            // } else if (event.target.classList.contains("fa-chevron-down")) {
+            //     let lowerAmount = event.target;
+            //     let id = lowerAmount.dataset.id;
+            //     let tempItem = cart.find(item => item.id === id);
+            //     tempItem.amount = tempItem.amount - 1;
+            //     if(tempItem.amount > 0) {
+            //         Storage.saveCart(cart);
+            //         this.setCartCosts(cart);
+            //         lowerAmount.previousElementSibling.innerText = tempItem.amount;
+            //     } else {
+            //         cartContent.removeChild(lowerAmount.parentElement.parentElement);
+            //         this.removeItem(id);
+            //     }
+            // }
         })
     }
     clearCart() {
-        let cartItems = cart.map(item => item.id);
-        cartItems.forEach(id => this.removeItem(id));
-        while(cartContent.children.length > 0) {
-            cartContent.removeChild(cartContent.children[0])
-        }
+        Storage.setCartContents([]);
+        this.drawCart();
         this.hideCart();
     }
     removeItem(id) {
@@ -289,18 +279,40 @@ class Storage {
         return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []; 
     }
 
+
     static getCartContents() {
         const cartString = localStorage.getItem('cart');
         if (cartString) return JSON.parse(cartString);
         return [];
     }
-
-    static addItemToCart(item) {
+    static setCartContents(cart) {
+        const data = JSON.stringify(cart);
+        localStorage.setItem('cart', data);
+    }
+    static addItemToCart(sku) {
         // we might want to add logic here to see if the item is already in the cart, 
         // if it is, we should just update the quantity rather than add a new item
         const cart = this.getCartContents();
-        cart.push(item);
-        localStorage.setItem('cart', JSON.stringify(cart));
+        const existingItem = cart.find(item => item.sku === sku);
+        if (existingItem) {
+            this.setItemAmount(existingItem.sku, existingItem.amount + 1);
+        } else {
+            const item = { amount: 1, sku }
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    }
+    // removes all entries of an sku from the basket, regardless of quantity
+    static removeItemFromCart(sku) {
+        const cart = Storage.getCartContents();
+        const updatedCart = cart.filter(item => item.sku !== sku);
+        Storage.setCartContents(cart);
+    }
+    static setItemAmount(sku, newAmount) {
+        const cart = Storage.getCartContents();
+        const matchingItem = cart.find(item => item.sku === sku);
+        matchingItem.amount = newAmount;
+        Storage.setCartContents(cart);
     }
 }
 
